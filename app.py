@@ -16,5 +16,19 @@ def login():
 
     return render_template("login.html")
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        name = request.form["name"]
+        email = request.form["email"]
+
+        return render_template(
+            "message.html",
+            title="Registration Successful",
+            message=f"Thank you {name}, your account has been created."
+        )
+
+    return render_template("register.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
