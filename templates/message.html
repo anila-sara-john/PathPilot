@@ -1,9 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="message-card">
-    <h2>Login Successful</h2>
-    <p>Your login form has been submitted successfully</p>
-    <a href="/">Go to Home</a>
-</div>
+    <h2>{{ title }}</h2>
+    <p>{{ message }}</p>
+
+    <a href="/login">Go to Login</a>
 {% endblock %}
