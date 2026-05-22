@@ -1,5 +1,5 @@
 # **PathPilot – Career Suitability Evaluation Web Application**
-PathPilot is a simple web-based career suitability evaluation system developed as a mini project as part of our Computer Science academic journey.
+PathPilot is a simple web-based career suitability evaluation system developed as a mini project.
 
 The project helps users evaluate how suitable they are for a selected career using a questionnaire-based weighted scoring system. Users can choose a stream and career of interest, answer career-specific questions, and receive a suitability evaluation along with suggestions.
 
