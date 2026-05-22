@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container d-flex justify-content-center">
+  <div class="login-card career-box">
+
+    <!-- Back button at top -->
+    <div class="top-back">
+      <a href="{{ url_for('stream_selection') }}" class="btn btn-secondary back-btn">
+        ← Back
+      </a>
+    </div>
+
+    <h2>Choose Your Career</h2>
+
+    <p class="message-text">
+      Choose your career of interest under
+      <strong>{{ stream }}</strong>.
+    </p>
+
+    <input type="text"
+           id="careerSearch"
+           class="stream-search"
+           placeholder="Search careers...">
+
+    {% if careers %}
+      <form method="POST" action="/career-selection">
+
+        <div class="career-grid">
+          {% for career in careers %}
+            <label class="career-option">
+              <input type="radio"
+                     name="career"
+                     value="{{ career }}"
+                     {% if selected_career == career %}checked{% endif %}
+                     required>
+              <span>{{ career }}</span>
+            </label>
+          {% endfor %}
+        </div>
+
+        <div class="submit-area mt-4">
+          <button type="submit" class="btn btn-primary px-4">
+            Proceed 
+          </button>
+        </div>
+
+      </form>
+    {% else %}
+      <p class="message-text">
+        No careers available.
+      </p>
+    {% endif %}
+
+  </div>
+</div>
+
+<script>
+const searchInput = document.getElementById("careerSearch");
+const options = document.querySelectorAll(".career-option");
+
+searchInput.addEventListener("keyup", function(){
+  const value = this.value.toLowerCase();
+
+  options.forEach(option=>{
+    const text = option.innerText.toLowerCase();
+
+    if(text.includes(value)){
+      option.style.display="block";
+    }else{
+      option.style.display="none";
+    }
+  });
+});
+</script>
+
+{% endblock %}

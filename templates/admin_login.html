@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Login | PathPilot</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/static/css/admin_style.css">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+    <div class="container">
+
+      <a class="navbar-brand d-flex align-items-center" href="/admin">
+          <img src="{{ url_for('static', filename='images/pathpilot-logo.png') }}"
+              alt="PathPilot"
+              height="40"
+              class="me-2">
+          <span class="brand-text">PathPilot</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <div class="career-cloud">
+    <span>Engineering</span>
+    <span>AI</span>
+    <span>Data Science</span>
+    <span>MBA</span>
+    <span>Medicine</span>
+    <span>Law</span>
+    <span>Design</span>
+    <span>Startups</span>
+    <span>Research</span>
+    <span>Government</span>
+  </div>
+
+  <div class="page-content">
+    <div class="welcome-box">
+      <h1 class="logo-text">PathPilot Admin Portal</h1>
+      <p>Secure access for administrators</p>
+    </div>
+
+    <div class="login-card">
+      <div class="logo-text">Admin Login</div>
+      <form action="/admin_login" method="POST">
+        <label>Username</label>
+        <input type="text" name="username" class="input-field" required>
+
+        <label>Password</label>
+        <input type="password" name="password" class="input-field" required>
+
+        <button type="submit" class="login-btn">Login</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

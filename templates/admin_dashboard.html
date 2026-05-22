@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | PathPilot</title>
+  <link rel="stylesheet" href="/static/css/admin_style.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+    <div class="container">
+
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center" href="{{ url_for('admin_dashboard') }}">
+          <img src="{{ url_for('static', filename='images/pathpilot-logo.png') }}"
+              alt="PathPilot"
+              height="40"
+              class="me-2">
+          <span class="brand-text">PathPilot</span>
+      </a>
+
+      <!-- Logout Button -->
+      {% if admin_logged_in %}
+      <div class="nav-buttons">
+    <a class="logout-pill btn-danger" href="{{ url_for('admin_logout') }}">
+        Logout
+    </a>
+</div>
+      {% endif %}
+
+    </div>
+  </nav>
+
+  <div class="career-cloud">
+    <span>Engineering</span>
+    <span>AI</span>
+    <span>Data Science</span>
+    <span>MBA</span>
+    <span>Medicine</span>
+    <span>Law</span>
+    <span>Design</span>
+    <span>Startups</span>
+    <span>Research</span>
+    <span>Government</span>
+  </div>
+
+  <div class="page-content">
+    <div class="welcome-box">
+      <h1>Admin Dashboard</h1>
+      <p>Manage users and system configurations</p>
+    </div>
+
+    <div class="login-card admin-card">
+      <div class="logo-text">Admin Options</div>
+
+      <div class="dashboard-buttons">
+          <a href="{{ url_for('view_users') }}" class="dashboard-btn">View Users and Scores</a>
+          <a href="{{ url_for('admin_manage_streams') }}" class="dashboard-btn">Manage Streams</a>
+          
+          <a href="{{ url_for('admin_manage_careers_select') }}" class="dashboard-btn">Manage Career Options</a>
+          
+          <a href="{{ url_for('admin_streams') }}" class="dashboard-btn">Manage Questionnaire</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

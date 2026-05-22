@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Streams | PathPilot</title>
+  <link rel="stylesheet" href="/static/css/admin_style.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center" href="{{ url_for('admin_dashboard') }}">
+        <img src="{{ url_for('static', filename='images/pathpilot-logo.png') }}" alt="PathPilot" height="40"
+          class="logo-img">
+        <span class="brand-text">PathPilot</span>
+      </a>
+      <!-- Buttons -->
+      <div class="nav-buttons">
+        <a class="btn-light nav-btn" href="{{ url_for('admin_dashboard') }}">Home</a>
+        <a class="btn-danger logout-pill" href="{{ url_for('admin_logout') }}">
+          Logout
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-content">
+    <div class="questions-wrapper">
+      <div class="questions-container">
+        <div class="welcome-box">
+          <h1>Stream Management</h1>
+          <p>Add, Edit, or Delete academic streams</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-card questions-card">
+      <div style="margin-bottom: 25px; text-align: right;">
+        <form action="/add_stream" method="POST" style="display: flex; gap: 10px; justify-content: flex-end;">
+          <input type="text" name="stream_name" placeholder="Enter new stream name..." required
+            style="padding: 10px; width: 300px; border-radius: 5px; border: 1px solid #ccc;">
+          <button type="submit" class="dashboard-btn" style="margin: 0; width: auto; padding: 10px 25px;">
+            + Add Stream
+          </button>
+        </form>
+      </div>
+
+      <div class="table-container questions-table">
+        <table class="question-table">
+
+          <thead>
+            <tr>
+              <th style="width:15%; text-align:left;">ID</th>
+              <th style="text-align:left;">Stream Name</th>
+              <th style="width:25%; text-align:left;">Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for stream in streams %}
+            <tr>
+              <td style="text-align:left;">{{ stream['id'] }}</td>
+
+              <td style="text-align:left;">
+                {{ stream['stream_name'] }}
+              </td>
+
+              <td style="text-align:left; white-space:nowrap;">
+                <a href="{{ url_for('edit_stream', stream_id=stream['id']) }}" class="edit-btn"
+                  style="margin-right:10px;">
+                  Edit
+                </a>
+
+                <a href="{{ url_for('delete_stream', stream_id=stream['id']) }}" class="delete-btn"
+                  onclick="return confirm('Deleting this stream will remove all associated careers and questions. Proceed?')">
+                  Delete
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+
+        </table>
+      </div>
+
+      <div style="margin-top: 20px;">
+        <button onclick="location.href='/admin_dashboard'" class="back-btn"
+          style="border: none; cursor: pointer; padding: 12px 24px;">
+          ⬅ Back
+        </button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

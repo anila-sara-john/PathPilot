@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Careers | PathPilot</title>
+  <link rel="stylesheet" href="/static/css/admin_style.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+  <div class="container">
+
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center" href="{{ url_for('admin_dashboard') }}">
+      <img src="{{ url_for('static', filename='images/pathpilot-logo.png') }}"
+           alt="PathPilot"
+           height="40"
+           class="logo-img">
+      <span class="brand-text">PathPilot</span>
+    </a>
+
+    <!-- Buttons -->
+    <div class="nav-buttons">
+      <a class="btn-light nav-btn" href="{{ url_for('admin_dashboard') }}">Home</a>
+
+      {% if admin_logged_in %}
+      <a class="btn-danger logout-pill" href="{{ url_for('admin_logout') }}">
+        Logout
+      </a>
+      {% endif %}
+    </div>
+
+  </div>
+</nav>
+
+<div class="page-content">
+  <div class="questions-wrapper">
+    <div class="questions-container">
+      <div class="welcome-box">
+        <h1>Careers in {{ stream['stream_name'] }}</h1>
+        <p>Add or remove career options for this stream</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-card questions-card">
+    
+    <div style="margin-bottom: 25px; text-align: right;">
+      <form action="{{ url_for('add_career', stream_id=stream['id']) }}" method="POST" style="display: flex; gap: 10px; justify-content: flex-end;">
+          <input type="text" name="career_name" placeholder="Enter new career..." required 
+                 style="padding: 10px; width: 300px; border-radius: 5px; border: 1px solid #ccc;">
+          <button type="submit" class="dashboard-btn" style="margin: 0; width: auto; padding: 10px 25px;">+ Add Career</button>
+      </form>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div id="flash-msg" class="alert alert-{{ category }}" style="padding: 15px; margin-bottom: 20px; border-radius: 8px; text-align: center; background-color: #e2f3f5; border: 1px solid #bee5eb; color: #0c5460;">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+   <div class="table-container questions-table">
+  <table class="question-table">
+    <thead>
+      <tr>
+        <th style="width: 15%; text-align:left;">ID</th>
+        <th style="text-align:left;">Career Name</th>
+        <th style="width: 20%; text-align:left;">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for career in careers %}
+      <tr>
+
+        <td style="padding:12px;">
+          {{ career['id'] }}
+        </td>
+
+        <td style="padding:12px;">
+          {{ career['career_name'] }}
+        </td>
+
+        <td style="padding:12px;">
+          <div style="display:flex; gap:10px;">
+            
+            <a href="{{ url_for('edit_career', career_id=career['id']) }}"
+               class="edit-btn">
+               Edit
+            </a>
+
+            <a href="{{ url_for('delete_career', career_id=career['id'], stream_id=stream['id']) }}"
+               class="delete-btn"
+               onclick="return confirm('Delete this career?')">
+               Delete
+            </a>
+
+          </div>
+        </td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+    <div style="margin-top: 20px;">
+      <a href="{{ url_for('admin_manage_careers_select') }}" class="back-btn" style="display: inline-block; text-decoration: none; padding: 12px 24px;">
+        ⬅ Back
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const flash = document.getElementById('flash-msg');
+  if (flash) {
+    setTimeout(() => {
+      flash.style.display = 'none';
+    }, 3000);
+  }
+});
+</script>
+
+</body>
+</html>

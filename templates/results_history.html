@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4" style="color: #1a365d; font-weight: 700;">Your Past Results</h1>
+
+    {% if results %}
+        <div class="table-responsive">
+            <table class="table table-hover border">
+                <thead>
+                    <tr>
+                        <th style="background-color: #0d6efd !important; color: white;" class="py-3">#</th>
+                        <th style="background-color: #0d6efd !important; color: white;" class="py-3">Career</th>
+                        <th style="background-color: #0d6efd !important; color: white;" class="py-3">Score</th>
+                        <th style="background-color: #0d6efd !important; color: white;" class="py-3">Percentage</th>
+                        <th style="background-color: #0d6efd !important; color: white;" class="py-3">Suitability</th>
+                        <th style="background-color: #0d6efd !important; color: white;" class="py-3">Date Taken</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in results %}
+                        <tr class="align-middle">
+                            <td>{{ loop.index }}</td>
+                            <td class="fw-bold">{{ r.career_name }}</td>
+                            <td>{{ r.score }}</td>
+                            <td>{{ r.percentage }}%</td>
+                            
+                            <td>
+                                {# Logic: Success (Green), Warning (Yellow), Danger (Red) #}
+                                <span class="badge rounded-pill px-3 py-2 
+                                    {% if r.percentage >= 70 %}
+                                        bg-success
+                                    {% elif r.percentage >= 40 %}
+                                        bg-warning text-dark
+                                    {% else %}
+                                        bg-danger
+                                    {% endif %}">
+                                    {{ r.suitability }}
+                                </span>
+                            </td>
+                            
+                            <td>{{ r.taken_at.strftime("%d %b-%Y") }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="/" class="btn btn-primary mt-3 px-4">Back to Home</a>
+
+    {% else %}
+        <p>You have not taken any assessments yet.</p>
+        <a href="/stream-selection" class="btn btn-primary mt-3">Take Assessment</a>
+    {% endif %}
+</div>
+{% endblock %}

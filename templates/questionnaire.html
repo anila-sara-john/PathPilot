@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="questionnaire-page">
+
+  <!-- Back button -->
+  <div class="top-back">
+    <a href="{{ url_for('career_selection') }}" class="btn btn-secondary back-btn">
+      ← Back
+    </a>
+  </div>
+
+  <h1 class="login-title fs-1">Career Fit Assessment</h1>
+
+  <p class="page-subtitle">
+    Attempt these questions to see how well you are suited for a career in
+    <strong>{{ career }}</strong>.
+  </p>
+
+  {% if questions %}
+    <form method="POST" class="questionnaire-form">
+
+      {% for q in questions %}
+        <div class="question-card">
+          <p class="question-text">
+            {{ loop.index }}. {{ q.question_text }}
+          </p>
+
+          <div class="option-group">
+            <label class="option-item">
+              <input type="radio" name="q{{ loop.index }}" value="Yes" required>
+              <span>Yes</span>
+            </label>
+
+            <label class="option-item">
+              <input type="radio" name="q{{ loop.index }}" value="No">
+              <span>No</span>
+            </label>
+          </div>
+        </div>
+      {% endfor %}
+
+      <div class="submit-area">
+        <button type="submit" class="submit-btn">
+          Submit Assessment
+        </button>
+      </div>
+
+    </form>
+  {% endif %}
+
+</div>
+
+{% endblock %}

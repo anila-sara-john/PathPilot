@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users and Scores | PathPilot</title>
+  <link rel="stylesheet" href="/static/css/admin_style.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+    <div class="container">
+
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center" href="{{ url_for('admin_dashboard') }}">
+        <img src="{{ url_for('static', filename='images/pathpilot-logo.png') }}" alt="PathPilot" height="40"
+          class="logo-img">
+        <span class="brand-text">PathPilot</span>
+      </a>
+
+      <!-- Buttons -->
+      <div class="nav-buttons">
+        <a class="btn-light nav-btn" href="{{ url_for('admin_dashboard') }}">Home</a>
+
+        {% if admin_logged_in %}
+        <a class="btn-danger logout-pill" href="{{ url_for('admin_logout') }}">
+          Logout
+        </a>
+        {% endif %}
+      </div>
+
+    </div>
+  </nav>
+
+  <div class="page-content">
+    <div class="questions-wrapper">
+      <div class="questions-container">
+        <div class="welcome-box">
+          <h1>User Performance Logs</h1>
+          <p>Review student results and career alignments</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-card questions-card">
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category, message in messages %}
+      <div class="alert alert-{{ category }}"
+        style="padding: 10px; margin-bottom: 20px; border-radius: 8px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; text-align: center;">
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+
+      <div class="table-container questions-table">
+        <table class="question-table" id="userTable">
+          <thead>
+            <tr>
+              <th style="width: 5%;">ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Stream</th>
+              <th>Career</th>
+              <th style="width: 8%;">Score</th>
+              <th style="width: 10%;">%</th>
+              <th>Date & Time</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for user in users %}
+            <tr>
+              <td>{{ user['id'] }}</td>
+              <td>{{ user['name'] }}</td>
+              <td>{{ user['email'] }}</td>
+              <td>{{ user['stream_name'] if user['stream_name'] else 'N/A' }}</td>
+              <td>{{ user['career_name'] if user['career_name'] else 'N/A' }}</td>
+              <td>{{ user['score'] if user['score'] is not none else '0' }}</td>
+              <td>{{ user['percentage'] if user['percentage'] is not none else '0' }}%</td>
+
+              <td style="font-size:16px; white-space:nowrap;">
+                {{ user['formatted_date'] }}
+              </td>
+
+              <td>
+                <a href="/delete_user/{{ user['id'] }}" class="delete-btn"
+                  onclick="return confirm('Delete this user and all their results?')">
+                  Delete
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+
+        </table>
+      </div>
+
+      <div style="margin-top: 20px; text-align: left;">
+        <button onclick="history.back()" class="back-btn" style="border: none; cursor: pointer; padding: 12px 24px;">
+          ⬅ Back
+        </button>
+      </div>
+
+    </div>
+
+    <br><br>
+  </div>
+
+</body>
+
+</html>

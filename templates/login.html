@@ -1,17 +1,22 @@
 {% extends "base.html" %}
-
 {% block content %}
-<div class="login-card">
+<div class="login-wrapper">
+  <div class="login-card">
     <h2>Login</h2>
+
     <form method="POST" action="/login">
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required class="input-field"><br>
+      <label>Email</label>
+      <input type="email" name="email" class="input-field" required>
 
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required class="input-field"><br>
+      <label>Password</label>
+      <input type="password" name="password" class="input-field" required>
 
-        <button type="submit" class="login-btn">Login</button>
+      <button class="login-btn">Login</button>
+
+      <p class="register-link">
+        Don’t have an account? <a href="/register">Register</a>
+      </p>
     </form>
-    <p class="register-link">Don't have an account? <a href="/register">Register</a></p>
+  </div>
 </div>
 {% endblock %}
