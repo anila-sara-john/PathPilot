@@ -20,11 +20,13 @@ The project helps users evaluate how suitable they are for a selected career usi
 - Add/Edit/Delete careers
 - Add/Edit/Delete questionnaires
 
-## **Technologies Used**
-- HTML - Used to strucutre the web pages of the application.
+## **Tools and Technologies Used**
+- HTML - Used to structure the web pages of the application.
 - CSS - Used to design and style the user interface.
 - Flask - Used as the backend framework to handle routing and application logic.
 - MySQL - Used as the database to store users, careers, questions, and results data.
+- Visual Studio Code - Used for project development and code editing.
+- MySQL Workbench – Used for database management and SQL operations.
 
 ## **How the System Works**
 1. User registers and logs into the system.
@@ -41,18 +43,20 @@ The project helps users evaluate how suitable they are for a selected career usi
 ## **Installation & Setup**
 1. Clone the repository
    ```bash
-   git clone <[repository_url](https://github.com/anila-sara-john/PathPilot)>
+   git clone https://github.com/anila-sara-john/PathPilot.git
    ```
 2. Navigate to the project folder
    ```bash
-   git clone <cd PathPilot>
+   cd PathPilot
    ```
 
 3. Configure MySQL database
+   - Install and set up MySQL Workbench
    - Create a MySQL database
-   - Import/create required tables
-   - Update database credentials in app.py
-4. Run the application
+   - Import the SQL dump file located in:
+     ` database/Dump20260306.sql `
+   - Update the database credentials in app.py
+5. Run the application
    ```bash
    python app.py
    ```
@@ -63,6 +67,19 @@ The project helps users evaluate how suitable they are for a selected career usi
 - Advanced recommendation logic
 - Improved UI/UX
 - Analytics Dashboard
-  
 
+## **Credits**
 
+This project was developed with the help of the following learning resources and references:
+
+- **Flask Tutorial Guidance:**  
+  [Flask Tutorial by Yes Tech Media](https://www.youtube.com/@YesTechMedia) — Helped in understanding Flask fundamentals and backend development concepts.
+
+- **MySQL Workbench Setup Reference:**  
+  [Learn how to download and install MySQL 8.0.40 on Windows 11 by Amit Thinks](https://www.youtube.com/watch?v=hiS_mWZmmI0&t=123s) — Helped in setting up and configuring MySQL Workbench.
+
+- **Flask-MySQL Connectivity Guidance:**  
+  [How to connect MySQL Database with Flask tutorial by United Top Tech](https://www.youtube.com/watch?v=14HTiBQEQ9M&t=386s) — Helped in connecting the Flask application with the MySQL database.
+
+- **Project Idea and Implementation:**  
+  Developed collaboratively by Anila Sara John, Anjaleena Joseph, Dhanalakshmi Pullarkatt Prasanth, and Drutha G Shenoy as part of a mini project.
