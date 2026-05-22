@@ -54,9 +54,9 @@ The project helps users evaluate how suitable they are for a selected career usi
    - Install and set up MySQL Workbench
    - Create a MySQL database
    - Import the SQL dump file located in:
-     ` database/Dump20260306.sql `
-   - Update the database credentials in app.py
-5. Run the application
+     `database/Dump20260306.sql`
+   - Update the database credentials in `app.py`
+4. Run the application
    ```bash
    python app.py
    ```
